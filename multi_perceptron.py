@@ -20,6 +20,7 @@ def multiclass(train_samples, train_labels, shape):
 
 
 if __name__ == '__main__':
+    print("Multiclass Perceptron")
 
     tname = sys.argv[1] if len(sys.argv) > 1 else 'data/letters.train.data'
     dname = sys.argv[2] if len(sys.argv) > 2 else 'data/letters.test.data'

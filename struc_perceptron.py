@@ -3,24 +3,26 @@ import sys
 from sklearn.utils import shuffle
 
 LEARNING_RATE = 1
-EPOCHS = 10
+EPOCHS = 5
 
-def multiclass(train_samples, train_labels, shape):
-    params = np.random.rand(shape)
+
+def multiclass(train_samples, train_labels):
+    params = np.zeros(X_INPUT * CATEGORIES)
     for i in range(EPOCHS):
         X, Y = shuffle(train_samples, train_labels)
         print(i)
         for sample, label in zip(X, Y):
-            pred = np.argmax(sample.dot(params))
-            params += sample_to_feature(sample, label) - sample_to_feature(sample, pred)
+            features = np.array([sample_to_feature(sample, lab) for lab in range(CATEGORIES)])
+            pred = np.argmax(features.dot(params))
+            if pred != label:
+                params = params + features[label] - features[pred]
     return params
 
-def sample_to_feature(x, y):
-    shape = len(x) * 26
-    feat = np.zeros(shape)
+
 
 
 if __name__ == '__main__':
+    print("Structured Multiclass Perceptron")
 
     tname = sys.argv[1] if len(sys.argv) > 1 else 'data/letters.train.data'
     dname = sys.argv[2] if len(sys.argv) > 2 else 'data/letters.test.data'
@@ -37,11 +39,8 @@ if __name__ == '__main__':
     categories = len(l2i)
     shape = input_vector * categories
 
-    #w = np.random.rand(input_vector, categories)
+    w = multiclass(train_samples, train_labels)
 
-    w = multiclass(train_samples, train_labels, shape)
-    #for i in range(EPOCHS):
-        #w = multiclass(train)
+    accD = accuracy_struc(dev_samples, dev_labels, w)
 
-    accD = accuracy(dev_samples, dev_labels, w)
-    accT = accuracy(train_samples, train_labels, w)
+    print('Accuracy on the dev set: {}'.format(accD))

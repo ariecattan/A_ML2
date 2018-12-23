@@ -16,6 +16,9 @@ def multiclass(train_samples, train_labels):
             pred = np.argmax(features.dot(params))
             if pred != label:
                 params = params + features[label] - features[pred]
+
+        accD = accuracy_struc(dev_samples, dev_labels, params)
+        print('Accuracy on the dev set: {}'.format(accD))
     return params
 
 
@@ -41,6 +44,4 @@ if __name__ == '__main__':
 
     w = multiclass(train_samples, train_labels)
 
-    accD = accuracy_struc(dev_samples, dev_labels, w)
 
-    print('Accuracy on the dev set: {}'.format(accD))

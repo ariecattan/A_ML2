@@ -15,6 +15,9 @@ def multiclass(train_samples, train_labels, shape):
             if pred != label:
                 params[:, label] += sample
                 params[:, pred] -=  sample
+
+        accD = accuracy(dev_samples, dev_labels, params)
+        print('Accuracy on the dev set: {}'.format(accD))
     return params
 
 
@@ -37,12 +40,7 @@ if __name__ == '__main__':
     categories = len(l2i)
     shape = (input_vector, categories)
 
-    #w = np.random.rand(input_vector, categories)
 
     w = multiclass(train_samples, train_labels, shape)
-    #for i in range(EPOCHS):
-        #w = multiclass(train)
 
-    accD = accuracy(dev_samples, dev_labels, w)
 
-    print('Accuracy on the dev set: {}'.format(accD))

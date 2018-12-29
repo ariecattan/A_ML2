@@ -3,7 +3,7 @@ import sys
 from sklearn.utils import shuffle
 
 LEARNING_RATE = 1
-EPOCHS = 50
+EPOCHS = 3
 
 def multiclass(train_samples, train_labels, shape):
     params = np.random.rand(shape[0], shape[1])

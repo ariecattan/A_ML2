@@ -3,7 +3,7 @@ import sys
 from sklearn.utils import shuffle
 
 LEARNING_RATE = 1
-EPOCHS = 5
+EPOCHS = 3
 
 
 def multiclass(train_samples, train_labels):

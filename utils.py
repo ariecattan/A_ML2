@@ -7,17 +7,36 @@ def dic_files(labels):
     i2l = {i: l for l, i in l2i.items()}
     return l2i, i2l
 
+
+def last_letter(id):
+    if id == '-1':
+        return True
+    return False
+
 def read_vectors_file(fname):
     out = np.loadtxt(fname, dtype=np.str)
     out = out[:, 1:]
-
     labels = out[:, 0]
+
     vectors = out[:, -8*16:]
     vectors = [list(map(float, vec)) for vec in vectors]
     vectors = np.array(vectors)
 
     return vectors, labels
 
+
+
+def read_files_previous(fname):
+    out = np.loadtxt(fname, dtype=np.str)
+    out = out[:, 1:]
+    labels = out[:, 0]
+    next = out[:, 1]
+    next = list(map(lambda x: last_letter(x), next))
+    vectors = out[:, -8 * 16:]
+    vectors = [list(map(float, vec)) for vec in vectors]
+    vectors = np.array(vectors)
+
+    return vectors, labels, next
 
 def accuracy(data, label, params):
     preds = data.dot(params)
@@ -40,3 +59,18 @@ def accuracy_struc(data, label, params):
             counter += 1
 
     return counter / len(data)
+
+
+
+def files_to_word(fname):
+    out = np.loadtxt(fname, dtype=np.str)
+    out = out[:, 1:]
+    words = []
+    word = []
+    for x in out:
+        word.append(x)
+        if x[1] == '-1':
+            words.append(np.array(word))
+            word = []
+
+    return np.array(words)

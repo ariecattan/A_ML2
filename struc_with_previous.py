@@ -13,8 +13,8 @@ LETTERS = 27
 
 print("Structured Multiclass Perceptron With Previous Label")
 
-mode = sys.argv[1] if len(sys.argv) > 1 else '-t' # '-t'
-arg1 = sys.argv[2] if len(sys.argv) > 2 else 'data/letters.train.data'
+mode = sys.argv[1] if len(sys.argv) > 1 else '-p' # '-t'
+arg1 = sys.argv[2] if len(sys.argv) > 2 else 'data/letters.test.data'
 arg2 = sys.argv[3] if len(sys.argv) > 3 else 'params.txt'
 arg3 = sys.argv[4] if len(sys.argv) > 4 else None
 
